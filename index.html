@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,7 +40,7 @@ header{
   font-weight:400;color:var(--white);line-height:1.15;
 }
 .hd-name span{display:block;font-size:0.85rem;font-weight:400;
-  color:rgba(255,255,255,0.6);font-family:'Inter',sans-serif;
+  color:rgba(255,255,255,0.85);font-family:'Inter',sans-serif;
   letter-spacing:0.06em;margin-top:0.35rem;}
 .hd-meta{display:flex;flex-direction:column;gap:0.4rem;text-align:right}
 .hd-meta a{
@@ -339,7 +339,17 @@ blockquote cite{
   border-bottom:1px solid var(--green);padding-bottom:1px;}
 .pgc-link:hover{color:var(--terra);}
 
-.under-review-notice{
+.ur-notice-published{
+  display:flex;gap:1.25rem;align-items:flex-start;
+  background:var(--green-light);border:1px solid #b8d9c5;
+  border-left:4px solid var(--green);
+  border-radius:0 8px 8px 0;
+  padding:1.5rem 1.75rem;margin-top:1.5rem;
+}
+.ur-notice-published .ur-icon{font-size:1.4rem;color:var(--green);flex-shrink:0;padding-top:0.1rem;}
+.ur-notice-published .ur-title{font-family:'Lora',serif;font-size:1.05rem;font-weight:500;color:var(--green);margin-bottom:0.6rem;}
+.ur-notice-published p{font-size:0.88rem;color:var(--muted);margin-bottom:0.5rem;}
+
   display:flex;gap:1.25rem;align-items:flex-start;
   background:var(--sand);border:1px solid var(--border);
   border-left:4px solid var(--terra);
@@ -362,10 +372,31 @@ blockquote cite{
   background:var(--terra-light);
   border-radius:4px;display:inline-block;
 }
+
+.skip-link{
+  position:absolute;top:-100px;left:1rem;
+  background:var(--terra);color:#fff;
+  padding:0.5rem 1rem;border-radius:4px;
+  font-size:0.9rem;font-weight:500;
+  text-decoration:none;z-index:9999;
+  transition:top 0.2s;
+}
+.skip-link:focus{top:1rem;}
+.tab-btn:focus{
+  outline:3px solid var(--terra-mid);
+  outline-offset:2px;
+}
+.panel:focus{outline:none;}
+.mat-btn:focus,.opt-btn:focus,.btn-next:focus,.btn-back:focus{
+  outline:3px solid #c4885a;
+  outline-offset:2px;
+}
+a:focus{outline:3px solid var(--terra-mid);outline-offset:2px;}
 </style>
 </head>
 <body>
 
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 <header>
   <div class="hd-top">
     <div class="hd-left">
@@ -383,20 +414,20 @@ blockquote cite{
     </div>
   </div>
 
-    <div class="tab-nav">
-    <button class="tab-btn active" onclick="showTab('research',this)">Research</button>
-    <button class="tab-btn" onclick="showTab('publications',this)">Publications</button>
-    <button class="tab-btn" onclick="showTab('podcast',this)">Podcast</button>
-    <button class="tab-btn" onclick="showTab('poster',this)">Colombia 2023</button>
-    <button class="tab-btn" onclick="showTab('paper',this)">Artículo</button>
-    <button class="tab-btn" onclick="showTab('classes',this)">Clases</button>
+    <div class="tab-nav" role="tablist" aria-label="Secciones del sitio">
+    <button class="tab-btn active" onclick="showTab('research',this)" role="tab" aria-selected="true" aria-controls="tab-research" id="tab-btn-tab-research">Research</button>
+    <button class="tab-btn" onclick="showTab('publications',this)" role="tab" aria-selected="false" aria-controls="tab-publications" id="tab-btn-tab-publications">Publications</button>
+    <button class="tab-btn" onclick="showTab('podcast',this)" role="tab" aria-selected="false" aria-controls="tab-podcast" id="tab-btn-tab-podcast">Podcast</button>
+    <button class="tab-btn" onclick="showTab('poster',this)" role="tab" aria-selected="false" aria-controls="tab-poster" id="tab-btn-tab-poster">Colombia 2023</button>
+    <button class="tab-btn" onclick="showTab('paper',this)" role="tab" aria-selected="false" aria-controls="tab-paper" id="tab-btn-tab-paper">Artículo</button>
+    <button class="tab-btn" onclick="showTab('classes',this)" role="tab" aria-selected="false" aria-controls="tab-classes" id="tab-btn-tab-classes">Clases</button>
   </div>
 </header>
 
-<div class="panels">
+<main id="main-content"><div class="panels">
 
   <!-- ══ RESEARCH TAB ══ -->
-  <div class="panel active" id="tab-research">
+  <div class="panel active" id="tab-research" role="tabpanel" aria-labelledby="tab-btn-tab-research" tabindex="0">
     <h2 class="panel-title">My Research</h2>
     <p class="panel-sub">Andean colonial history · Indigenous women · ritual authority · digital humanities</p>
 
@@ -443,7 +474,7 @@ blockquote cite{
   </div>
 
   <!-- ══ PUBLICATIONS TAB ══ -->
-  <div class="panel" id="tab-publications">
+  <div class="panel" id="tab-publications" role="tabpanel" aria-labelledby="tab-btn-tab-publications" tabindex="0">
     <h2 class="panel-title">Publications</h2>
     <p class="panel-sub">Peer-reviewed articles · book manuscript · open educational resources</p>
 
@@ -491,7 +522,7 @@ blockquote cite{
           style="position:absolute;top:0;left:0;width:100%;height:100%;border:none"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
-          title="Gladys Potosí Chuquin — Poesía indígena">
+          title="Gladys Potosí Chuquin — Poesía indígena" aria-label="Video de Gladys Potosí Chuquin sobre poesía indígena">
         </iframe>
       </div>
     </div>
@@ -520,7 +551,7 @@ blockquote cite{
   </div>
 
   <!-- ══ PODCAST TAB ══ -->
-  <div class="panel" id="tab-podcast">
+  <div class="panel" id="tab-podcast" role="tabpanel" aria-labelledby="tab-btn-tab-podcast" tabindex="0">
     <h2 class="panel-title">Mi podcast</h2>
     <p class="panel-sub">Poemas en español · Día Internacional del Libro y la Lengua Española</p>
 
@@ -541,7 +572,7 @@ blockquote cite{
 
     <div class="embed-label">Escuchar en Spotify</div>
     <div class="embed-box">
-      <iframe src="https://open.spotify.com/embed/episode/23lk5ABcbVLXBnyrEA4Qhw"
+      <iframe src="https://open.spotify.com/embed/episode/23lk5ABcbVLXBnyrEA4Qhw" title="Podcast: Poemas en español — Día del Libro"
         width="100%" height="152" frameborder="0"
         allowtransparency="true" allow="encrypted-media"></iframe>
     </div>
@@ -560,7 +591,7 @@ blockquote cite{
   </div>
 
   <!-- ══ POSTER TAB ══ -->
-  <div class="panel" id="tab-poster">
+  <div class="panel" id="tab-poster" role="tabpanel" aria-labelledby="tab-btn-tab-poster" tabindex="0">
     <h2 class="panel-title">Programa — Colombia 2023</h2>
     <p class="panel-sub">Programa del viaje de estudio en el exterior · LSU · Bogotá, Manizales &amp; Santa Marta</p>
 
@@ -595,7 +626,7 @@ blockquote cite{
   </div>
 
     <!-- ══ ARTÍCULO TAB ══ -->
-  <div class="panel" id="tab-paper">
+  <div class="panel" id="tab-paper" role="tabpanel" aria-labelledby="tab-btn-tab-paper" tabindex="0">
 
     <div class="paper-header">
       <div class="paper-journal-bar">
@@ -639,20 +670,72 @@ blockquote cite{
       </div>
     </div>
 
-        <div class="under-review-notice">
-      <div class="ur-icon">⚑</div>
+        <div class="ur-notice-published">
+      <div class="ur-icon">✓</div>
       <div>
-        <div class="ur-title">Artículo en revisión por pares</div>
-        <p>Este trabajo está actualmente bajo revisión por pares. El contenido completo no está disponible públicamente durante este proceso.</p>
-        <p>El resumen y las palabras clave están disponibles arriba. Para solicitar una copia del manuscrito, puede contactarme directamente en <a href="mailto:lmcguf2@lsu.edu" style="color:var(--terra)">lmcguf2@lsu.edu</a>.</p>
-        <a href="https://doi.org/10.21704/rtn.v17i1.1896" target="_blank" class="ur-doi">Ver artículo publicado en Tierra Nuestra →</a>
+        <div class="ur-title">Artículo publicado · Acceso abierto CC BY 4.0</div>
+        <p>Publicado en <em>Tierra Nuestra</em>, Vol. 17, Núm. 1 (junio 2023), pp. 43–54.</p>
+        <a href="https://doi.org/10.21704/rtn.v17i1.1896" target="_blank" class="ur-doi">Ver en Tierra Nuestra → DOI 10.21704/rtn.v17i1.1896</a>
       </div>
+    </div>
+
+    <h3 class="paper-section-title"><span class="paper-section-num">1.</span> Introducción</h3>
+    <p>Cristóbal de Molina, el Cusqueño<span class="footnote-mark">1</span>, mencionó, en su <em>Relación de las fábulas y ritos de los Incas</em> (c. 1575), rituales a los guacas<span class="footnote-mark">2</span> del Hacedor, el Sol<span class="footnote-mark">3</span> y el Trueno. En este aspecto, su obra se asemeja a la del resto de cronistas peruanos de los siglos XVI y XVII, en las que los guacas masculinos desempeñan un papel preponderante en los mitos y ritos de los incas. No obstante, Molina se aparta de sus contemporáneos en cuanto al rol que otorga a lo femenino en el panteón de la religiosidad andina.</p>
+    <p>El propósito de este artículo es establecer la importancia de las diosas cusqueñas en las fiestas del Cápac Raymi, la Situa y el Inti Raymi, descritas por Cristóbal de Molina en su <em>Relación de las fábulas y ritos de los Incas</em>. Esto equivale a demostrar su participación en las ceremonias de las fiestas, primero, como diosas consortes de dioses masculinos (el Trueno o el Sol), y segundo, y más importante, como guacas o diosas tutelares. El término "tutelar" alude aquí a un guaca que funge como patrón de un evento en particular o al que se dedican ceremonias específicas.</p>
+    <p>La <em>Relación</em> de Molina no es, por supuesto, la única crónica que se ocupa de las deidades o guacas femeninas del mundo inca cusqueño. <em>La Suma y narración de los Incas</em> (1551), de Juan de Betanzos; la <em>Historia de los Incas</em> (1572), de Pedro Sarmiento de Gamboa, y la <em>Relación de los adoratorios</em> (1559-1571), de Polo de Ondegardo, son algunos textos coloniales que mencionan cultos cusqueños a la Tierra o la Luna. El <em>Manuscrito Huarochiri</em> (c. 1598) quizás sea la única crónica equiparable a la <em>Relación</em> de Molina en cuanto al tratamiento de las guacas femeninas.</p>
+
+    <h3 class="paper-section-title"><span class="paper-section-num">2.</span> Mujeres guacas y consortes</h3>
+    <p>Molina menciona al menos seis guacas mujeres. Las primeras aparecen en la fiesta del Inti Raymi como figuras llevadas en procesión por los señores principales y con los nombres propios de Palpasillo e Ynca Oicllo.</p>
+    <div class="paper-quote">Sacaban en esta fiesta las dos figuras de muger llamadas <em>Palpasillo</em> e <em>Ynca Oicllo</em>, con ropas muy ricas cuviertas en chapería de oro, llamadas llancapata, colcapata y paucaronco, llevaban el suntur paucar y unas ovejas grandes del grandor de los carneros, dos de oro y dos de plata. (de Molina, c. 1575/2010, p. 50)</div>
+    <p>Los nombres de estas dos guacas mujeres del Inti Raymi son muy similares en su grafía a los que aporta Molina más adelante (Palpa Ocllo e Ynca Ocllo), cuando pasa a describir otra fiesta, la de la Situa o Coya Raymi. El término <em>ocllo</em> es frecuente en crónicas posteriores a Molina, como las de Guamán Poma de Ayala (1615) y fray Martín de Murúa (c.1590-1613), quienes lo utilizan con frecuencia para referirse a las reinas o coyas<span class="footnote-mark">4</span>.</p>
+    <p>La mención de Mama Ocllo por Garcilaso permite interpretar las guacas femeninas desde la dualidad de la visión inca del mundo. Tom Zuidema postuló que las relaciones de poder entre las dualidades incas adoptan la forma de una diarquía (Zuidema, 1964). En la <em>Relación</em> de Molina, Palpasillo (o Palpa Ocllo) e Ynca Oicllo (o Ynca Ocllo) participan en los rituales como consortes del Sol y el Trueno, reproduciendo la organización dual del incario.</p>
+
+    <h3 class="paper-section-title"><span class="paper-section-num">3.</span> Pachamama y Pacsamama, diosas tutelares</h3>
+    <p>Algunas crónicas peruanas refieren ídolos de apariencia femenina que desempeñan la función de guacas tutelares. Tal es el caso de Pachamama, la diosa de la Tierra, y de la diosa Luna, ambas mencionadas por Molina. En quechua, la expresión <em>mama</em> designa la cualidad de origen y se le suma al sustantivo de un objeto, deidad o persona.</p>
+
+    <h4 class="paper-subsection-title">3.1 Pachamama, guaca de la Tierra</h4>
+    <p>Uno de los grandes aportes de Molina son las oraciones que introduce como parte de los rituales. De un corpus total de 14 oraciones en ambas lenguas, dos de ellas están dirigidas a la guaca tutelar Pachamama. La primera oración a Pachamama se ubica en la fiesta de la Situa:</p>
+    <div class="paper-quote quechua-block">
+      <div class="qk-line"><span class="qk-qu">Pachamama casillacta quespillacta, capac</span></div>
+      <div class="qk-line"><span class="qk-qu">Inca huahuayquicta marcari, atalli.</span></div>
+      <div class="qk-line qk-trans"><em>Declaración d'esta oración:</em> ¡O Tierra Madre, a tu hijo el Ynca, tenlo encima de ti, quieto y pacífico!</div>
+      <div class="qk-source">(de Molina, c. 1575/2010, p. 64)</div>
+    </div>
+    <p>La segunda oración a la Pachamama aparece en la ceremonia llamada <em>cepacoccha</em>. Esta segunda oración contiene la expresión quechua <em>cuyrumama</em>, que Calvo Pérez traduce como "¡Madre protegida por las nubes!" Szemiński se apoya además en el <em>Vocabulario de la lengua Aymara</em> de Bertonio (1612), donde aparece: <em>Pachamama, Suruymama</em>: "la tierra de pan llevar, y a cerca de los antiguos era nombre de reverencia".</p>
+
+    <h4 class="paper-subsection-title">3.2 Passamama o Pacsamama, guaca de la Luna</h4>
+    <div class="paper-quote">Sacavan también una figura de mujer que hera la huaca de la Luna, la qual llamavan <em>Passamama</em>. Teníanla a cargo mujeres, y así, cuando salían de la Cassa del Sol, donde tenía su aposento por si, ado agora es el mirador de Sancto Domingo, la sacavan ellas en hombros. La razón porque la tenían a cargo mujeres, porque decían hera mujer, como en su figura parece. (de Molina, c. 1575/2010, p. 71)</div>
+    <p>Las mujeres transportan desde el templo del Sol una figura femenina. Se trata de la guaca de la Luna, a la que otros cronistas nombran como <em>Quillamama</em>, y que Molina es el único que identifica como <em>Passamama</em>. Lo anterior demuestra que existía un culto lunar a Pacsamama, que esta guaca desempeñó un papel fundamental en las celebraciones de los iniciados y que fungía como divinidad tutelar para mujeres y hombres.</p>
+
+    <h3 class="paper-section-title"><span class="paper-section-num">4.</span> Conclusiones</h3>
+    <p>Molina subrayó más que ningún otro cronista el rol de las mujeres en los aspectos ritualistas y performativos de las principales fiestas cusqueñas. A diferencia de otros cronistas, se ocupa de nombrar las guacas femeninas y de describir el modo en que son veneradas. Así sucede con los rituales de la Situa del Coya Raymi, en los que la deidad de la Tierra, <strong>Pachamama</strong>, parece tener especial relevancia, y así ocurre también en los rituales de iniciación del Cápac Raymi, en los que cobra importancia <strong>Pacsamama</strong>, la guaca de la Luna.</p>
+    <p>Comprobar este papel preponderante de lo femenino abre nuevas líneas de interpretación para la <em>Relación</em> de Molina. La crónica resignifica la figura de la mujer dentro del panorama historiográfico del Perú colonial, puesto que la representa como un agente sagrado con un papel activo en los rituales. Es necesario replantearse el cambio de nominativo, así como la relación entre el quechua cusqueño y el aimara en referencia a las guacas femeninas, para realizar una mejor reconstrucción del rol de la mujer en la historiografía peruana.</p>
+
+    <div class="footnotes">
+      <h4>Notas al pie</h4>
+      <div class="fn-item"><div class="fn-num">1</div><div class="fn-text">No fue sino hasta 1990 (Urbano, 2008) que se supo que Cristóbal de Molina era español y no de Cusco, pese a que aún hoy se le sigue llamando "el Cusqueño" para diferenciarlo de otro cronista homónimo, Cristóbal de Molina el Almagrista.</div></div>
+      <div class="fn-item"><div class="fn-num">2</div><div class="fn-text">No existe consenso en cuanto al sentido del vocablo <em>guaca</em>. Domingo de Santo Tomás lo definió como "templo de ídolos o el mismo ídolo" (1560/2013, p. 788).</div></div>
+      <div class="fn-item"><div class="fn-num">3</div><div class="fn-text">En Molina, el Sol tiene la connotación de <em>Intip</em>, aunque en el mundo andino <em>Intip</em> y <em>Punchao</em> son variaciones de las representaciones del guaca solar.</div></div>
+      <div class="fn-item"><div class="fn-num">4</div><div class="fn-text"><em>Coya</em>, de acuerdo con el <em>Lexicón</em> de Domingo de Santo Tomás, significa "reina" (1560).</div></div>
+    </div>
+
+    <div class="references">
+      <h4>Referencias</h4>
+      <p class="ref-item">Bertonio, L. (1612). <em>Vocabulario de la lengua Aymara</em>. Casa de la Compañía de Jesús de Luli.</p>
+      <p class="ref-item">de Molina, C. (2008). <em>Relación de las fábulas y ritos de los Incas</em> (H. Urbano y J. Calvo Pérez, Eds.). Universidad de San Martín de Porres. (c. 1575).</p>
+      <p class="ref-item">de Molina, C. (2010). <em>Relación de las fábulas y ritos de los Incas</em> (P. Jiménez del Campo, Ed.). Iberoamericana Vervuert. (c. 1575).</p>
+      <p class="ref-item">de Santo Tomás, D. (2013). <em>Lexicón, o Vocabulario de la Lengua general del Perú</em> (J. Calvo Pérez y H. Urbano, Eds.). Universidad de San Martín de Porres. (1560).</p>
+      <p class="ref-item">González Holguín, D. (1608). <em>Vocabulario de la lengua general de todos los incas del Perú</em>. Francisco del Canto.</p>
+      <p class="ref-item">Rostworowski de Diez Canseco, M. (2007). <em>Estructuras andinas del poder: ideología religiosa y política</em>. Instituto de Estudios Peruanos.</p>
+      <p class="ref-item">Silverblatt, I. (1987). <em>Moon, sun and witches</em>. Princeton University Press.</p>
+      <p class="ref-item">Szemiński, J. (1993). Manqu Qhapaq Inka: ¿un poeta religioso? <em>Revista de Crítica Literaria Latinoamericana</em>, (37), 131–158.</p>
+      <p class="ref-item">Zuidema, T. (1964). <em>The ceque system of Cuzco</em>. E. J. Brill.</p>
     </div>
 
   </div>
 
     <!-- ══ CLASES TAB ══ -->
-  <div class="panel" id="tab-classes">
+  <div class="panel" id="tab-classes" role="tabpanel" aria-labelledby="tab-btn-tab-classes" tabindex="0">
     <h2 class="panel-title">Experiencia docente</h2>
     <p class="panel-sub">12+ años enseñando español y estudios latinoamericanos en múltiples instituciones</p>
 
@@ -865,9 +948,13 @@ blockquote cite{
 <script>
 function showTab(id, btn) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    b.classList.remove('active');
+    b.setAttribute('aria-selected','false');
+  });
   document.getElementById('tab-' + id).classList.add('active');
   btn.classList.add('active');
+  btn.setAttribute('aria-selected','true');
   window.scrollTo({top: 0, behavior: 'smooth'});
 }
 </script>
